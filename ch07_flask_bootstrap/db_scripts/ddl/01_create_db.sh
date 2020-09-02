@@ -1,0 +1,8 @@
+host="$1"
+PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" << EOF
+
+CREATE DATABASE sms_db;
+CREATE USER sms_user WITH ENCRYPTED PASSWORD 'itversity';
+GRANT ALL PRIVILEGES ON DATABASE sms_db TO sms_user;
+
+EOF

@@ -1,0 +1,19 @@
+version: '2.0'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      POSTGRES_PASSWORD: itversity
+    depends_on:
+      - "db"
+    command: ["./db_scripts/bootstrap_db.sh", "db", "flask", "run", "--host", "0.0.0.0", "--port", "5000"]
+  db:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: itversity
